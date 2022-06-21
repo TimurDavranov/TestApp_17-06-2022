@@ -1,0 +1,25 @@
+@model OrderFormViewModel
+
+@{
+    TempData["error"] = "Add order";
+    var product = (List<ProductFormViewModel>)ViewBag.Product;
+}
+
+<div class="container">
+    <input type="hidden" asp-for="Id">
+    
+    <select asp-for="ProductId">
+        @foreach (var item in product)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+    </select>
+    
+    <input type="text" asp-for="Count">
+    <span asp-validation-for="Count"></span>
+    
+    <input type="text" asp-for="Price">
+    <span asp-validation-for="Price"></span>
+    
+    <input type="submit" value="Submit"/>
+</div>
