@@ -1,0 +1,23 @@
+@model ProductFormViewModel
+
+@{
+    TempData["Title"] = "Add product";
+}
+
+<div class="container">
+    <form asp-action="FormProduct">
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <input type="hidden" asp-for="Id" value="@Model.Id">
+                <div class="form-group">
+                    <label asp-for="Name"></label>
+                    <input type="text" asp-for="Name" value="@Model.Name" class="form-control">
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary"/>
+            </div>
+            <div class="col-sm-4"></div>
+        </div>
+    </form>
+</div>

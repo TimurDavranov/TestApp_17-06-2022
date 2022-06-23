@@ -1,0 +1,48 @@
+﻿@using TestApp_17_06_2022.Enums
+@model LoginViewModel
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-4">
+            <form class="form-horizontal" asp-action="Index">
+                <input type="hidden" asp-for="IsReg" value="@Model.IsReg">
+                <div class="form-group">
+                    <label class="control-label">Username</label>
+                    <input asp-for="Login" class="form-control" type="text">
+                    <span asp-validation-for="Login" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" asp-for="Password">
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                @if (Model.IsReg)
+                {
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select asp-for="Role" class="form-control">
+                            <option value="0">@Roles.Admin.ToString()</option>
+                            <option value="1">@Roles.User.ToString()</option>
+                        </select>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="@ViewBag.Registration">
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-4"></div>
+    </div>
+</div>
+
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["error"]
+        </div>
+    }

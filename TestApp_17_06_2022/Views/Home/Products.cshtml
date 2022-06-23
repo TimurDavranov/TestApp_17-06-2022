@@ -1,0 +1,81 @@
+@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Product list";
+}
+@if (ViewBag.IsAdmin)
+{
+    <div class="form-group">
+        <a type="button" class="btn btn-primary" asp-action="FormProduct" method="get">Add product</a>
+        <a type="button" class="btn btn-primary" asp-action="FormOrder">Add order</a>
+    </div>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <h4>Orders</h4>
+            <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantiy</th>
+                        <th>Price</th>
+                        <th>Total price with VAT</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var order in Model.OrderList)
+                    {
+                        <tr>
+                            <td hidden>@order.Id</td>
+                            <td>@order.Name</td>
+                            <td>@order.Count</td>
+                            <td>@order.Price</td>
+                            <td>@order.TotalPriceWithVAT</td>
+                            @if (ViewBag.IsAdmin)
+                            {
+                                <td>
+                                    <a class="btn btn-link" asp-action="FormOrder" asp-route-Id="@order.Id" method="get">Edit</a> |
+                                    <form asp-action="DeleteOrder" asp-route-Id="@order.Id" method="post">
+                                        <input class="btn btn-link" type="submit" value="Delete"/>
+                                    </form>
+                                </td>
+                            }
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+        </div>
+        <div class="col-sm-4">
+            <h4>Products</h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var product in Model.ProductList)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        @if (ViewBag.IsAdmin)
+                        {
+                            <td>
+                                <a class="btn btn-link" asp-action="FormProduct" asp-route-Id="@product.Id" method="get">Edit</a> |
+                                <form asp-action="DeleteProduct" asp-route-Id="@product.Id" method="post">
+                                    <input type="submit" class="btn btn-link" value="Delete"/>
+                                </form>
+                            </td>
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
