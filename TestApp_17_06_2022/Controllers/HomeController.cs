@@ -85,7 +85,7 @@ namespace TestApp_17_06_2022.Controllers
         [HttpGet]
         public async Task<IActionResult> Products(bool isAdmin = false)
         {
-            if (isAdmin) ViewBag.IsAdmin = true;
+            ViewBag.IsAdmin = isAdmin;
 
             var products = await _productRep.GetAll();
             var orders = await _orderRep.GetAll();

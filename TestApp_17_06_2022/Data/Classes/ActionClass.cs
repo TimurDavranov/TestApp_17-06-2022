@@ -30,7 +30,8 @@ namespace TestApp_17_06_2022.Data.Classes
             var entity = new User()
             {
                 Login = model.Login,
-                Password = model.Password
+                Password = model.Password,
+                Role = model.Role
             };
             await _db.Users.AddAsync(entity);
             await _db.SaveChangesAsync();
